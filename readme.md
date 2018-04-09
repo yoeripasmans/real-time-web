@@ -7,9 +7,6 @@ During this course, students will:
 * Create a "live" web app which reflects changes to the back-end data model in reactive front-end views, using real-time, event-based, messaging technologies like sockets or server-sent-events.
 * Describe their work in a professional readme with insightful diagrams showing the life cycle of their data.
 
-
-> If you're seeing this message on a forked repo, it means one of our students hasn't changed the description yet 😈
-
 ## Week 1
 [Slides](https://drive.google.com/open?id=1QxeKsSXnf9poJFWoEe_slHuMb7apB-2eNyUTzi18kcQ)
 
@@ -27,3 +24,5 @@ During this course, students will:
 
 ## Grading
 In the first and second week you will receive oral feedback on your assignments. In week three you will have a chance to present your final assignment during an oral exam. This assessment will make up 100% of your grade for this course.
+
+> If you're seeing this message on a forked repo, it means one of our students hasn't changed the description yet 😈
