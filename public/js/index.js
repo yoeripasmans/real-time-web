@@ -314,6 +314,7 @@
 		}
 	}
 
+
 	socket.on('mousedown', function(index) {
 		var button = document.querySelectorAll('.sound-button');
 		for (var i = 0; i < button.length; i++) {
