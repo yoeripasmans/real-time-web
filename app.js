@@ -4,7 +4,6 @@ var controllers = require('./controllers');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var ss = require('socket.io-stream');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -23,8 +22,8 @@ io.on('connection', function(socket) {
 	socket.on('mousedown', function(index) {
         socket.broadcast.emit('mousedown', index);
     });
-	socket.on('mouseup', function(el) {
-        socket.broadcast.emit('mouseup', el);
+	socket.on('mouseup', function(index) {
+        socket.broadcast.emit('mouseup', index);
     });
 });
 
