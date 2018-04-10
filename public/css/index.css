@@ -167,7 +167,7 @@ main {
 
 .user-counter:before{
 	content: "";
-	display: inline-block;
+	display: none;
 	width: 13px;
 	height: 13px;
 	border-radius: 50%;
@@ -175,8 +175,8 @@ main {
 	margin-right: 7px;
 }
 
-.user-counter.active {
-	display: block!important;
+.user-counter.active, .user-counter.active:before {
+	display: inline-block!important;
 }
 
 @keyframes fly-in {
