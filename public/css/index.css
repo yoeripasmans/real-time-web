@@ -156,12 +156,10 @@ main {
 }
 
 .user-counter {
-	display: none!important;
-	position: absolute;
+	display: none;
     width: 100%;
     text-align: center;
     bottom: 4em;
-	display: flex;
 	align-items: center;
 	justify-content: center;
 }
@@ -176,9 +174,9 @@ main {
 	margin-right: 7px;
 }
 
-/* .user-counter.active, .user-counter.active:before {
-	display: inline-block!important;
-} */
+.user-counter.active, .user-counter.active:before {
+	display: flex;
+}
 
 @keyframes fly-in {
     0% {
@@ -225,8 +223,19 @@ input::-moz-focus-inner, button::-moz-focus-inner {
     padding: 0;
 }
 
+.overlay {
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: #151515;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
 .loader {
-    display: none;
     width: 60px;
     height: 60px;
     position: absolute;
@@ -236,7 +245,7 @@ input::-moz-focus-inner, button::-moz-focus-inner {
     transform: translate(-50%, -50%);
 }
 
-.loader.show {
+.overlay.show {
     display: block;
 }
 

@@ -28,9 +28,13 @@
 	var loader = {
 		element: document.querySelector('.loader'),
 		init: function() {
+			//Create overlay
+			this.overlay = document.createElement("div");
+			document.body.appendChild(this.overlay);
+			this.overlay.classList.add("overlay");
 			//Create loader div
 			this.element = document.createElement("div");
-			document.body.appendChild(this.element);
+			this.overlay.appendChild(this.element);
 			this.element.classList.add("loader");
 			//Create text
 			this.text = document.createElement("p");
@@ -46,10 +50,10 @@
 			}
 		},
 		show: function() {
-			this.element.classList.add("show");
+			this.overlay.classList.add("show");
 		},
 		hide: function() {
-			this.element.classList.remove("show");
+			this.overlay.classList.remove("show");
 		}
 
 	};
@@ -363,8 +367,8 @@
 
 	function playAllSound(sound) {
 		var audio = new Audio(sound.src);
-		var source = audioCtx.createMediaElementSource(audio);
-		source.connect(audioCtx.destination);
+		// var source = audioCtx.createMediaElementSource(audio);
+		// source.connect(audioCtx.destination);
 		audio.play();
 	}
 
