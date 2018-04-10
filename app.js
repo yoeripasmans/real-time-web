@@ -14,17 +14,28 @@ app.use(compression());
 app.use('/', controllers);
 
 io.on('connection', function(socket) {
-	console.log(io.engine.clientsCount);
+	
     console.log('a user connected');
     socket.on('playsound', function(sound) {
         socket.broadcast.emit('playsound', sound);
     });
-	socket.on('mousedown', function(index) {
+    socket.on('mousedown', function(index) {
         socket.broadcast.emit('mousedown', index);
     });
-	socket.on('mouseup', function(index) {
+    socket.on('mouseup', function(index) {
         socket.broadcast.emit('mouseup', index);
     });
+    socket.on('mouseup', function(index) {
+        socket.broadcast.emit('mouseup', index);
+    });
+	io.sockets.emit('totalUsers', {count: io.engine.clientsCount});
+
+    //Disconnect
+    socket.on('disconnect', function(data) {
+        //added this below
+        io.sockets.emit('totalUsers', {count: io.engine.clientsCount});
+    });
+
 });
 
 http.listen(process.env.PORT || 3000, function() {

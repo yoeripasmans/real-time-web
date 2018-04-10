@@ -315,14 +315,14 @@
 	socket.on('mousedown', function(index) {
 		var button = document.querySelectorAll('.sound-button');
 		for (var i = 0; i < button.length; i++) {
-			button[index].classList.add("active");
+			button[index].classList.add("socket-active");
 		}
 	});
 
 	socket.on('mouseup', function(index) {
 		var button = document.querySelectorAll('.sound-button');
 		for (var i = 0; i < button.length; i++) {
-			button[index].classList.remove("active");
+			button[index].classList.remove("socket-active");
 		}
 	});
 
@@ -348,5 +348,12 @@
 		source.connect(audioCtx.destination);
 		audio.play();
 	}
+
+	socket.on('totalUsers', function(data){
+        var userCounter = document.querySelector(".user-counter");
+		if(data.count > 1) {
+		userCounter.textContent = data.count + " people are connected";
+		}
+    });
 
 })();

@@ -86,6 +86,9 @@ main {
     background-color: #E63946;
 }
 
+.sound-button.socket-active {
+    background-color: #4BB4D7;
+}
 .audio-controls {
     margin: 32px auto;
     margin: 2em auto;
@@ -149,6 +152,10 @@ main {
     animation: fly-in 2s;
     transform: translate(-50%, -50%);
     opacity: 0;
+}
+
+.user-counter {
+	text-align: center;
 }
 
 @keyframes fly-in {
