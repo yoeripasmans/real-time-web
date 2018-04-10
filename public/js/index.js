@@ -269,10 +269,6 @@
 
 	}
 
-	socket.on('play sound', function(sound) {
-		playSound(sound);
-	});
-
 	function createPads(instruments) {
 
 		for (var i = 0; i < instruments.length; i++) {
@@ -309,19 +305,28 @@
 		}
 	}
 
-	function playSound(sound) {
+	function playSound(buffer) {
+
+		var source = audioCtx.createBufferSource();
+		source.buffer = buffer;
+		source.connect(audioCtx.destination);
+		if (!source.start) {
+			source.noteOn(0);
+		} else {
+			source.start(0);
+		}
+	}
+
+
+		socket.on('play sound', function(sound) {
+			playAllSound(sound);
+		});
+
+	function playAllSound(sound){
 		var audio = new Audio(sound.src);
 		var source = audioCtx.createMediaElementSource(audio);
 		source.connect(audioCtx.destination);
 		audio.play();
-		// var source = audioCtx.createBufferSource();
-		// source.buffer = buffer;
-		// source.connect(audioCtx.destination);
-		// if (!source.start) {
-		// 	source.noteOn(0);
-		// } else {
-		// 	source.start(0);
-		// }
 	}
 
 })();
