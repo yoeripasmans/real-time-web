@@ -126,6 +126,8 @@
 				switch (e.key) {
 					case keys[i]:
 						playSound(instruments[i]);
+						socket.emit('playsound', instruments[i]);
+						socket.emit('mousedown', i);
 						document.querySelector('.' + instruments[i].name).classList.add("active");
 				}
 			}
@@ -137,6 +139,7 @@
 			for (var i = 0; i < instruments.length; i++) {
 				switch (e.key) {
 					case keys[i]:
+						socket.emit('mouseup', i);
 						document.querySelector('.' + instruments[i].name).classList.remove("active");
 				}
 			}
@@ -281,16 +284,20 @@
 				button.classList.add("sound-button", instruments[j].name);
 				button.setAttribute("data-instrument", instruments[j].name);
 				button.addEventListener("click", function() {
-					socket.emit('play sound', instruments[j]);
+					socket.emit('playsound', instruments[j]);
 					playSound(instruments[j]);
 				});
 				var mouseDown = false;
+
 				button.addEventListener("mousedown", function() {
 					mouseDown = true;
+					socket.emit('mousedown', j);
 					this.classList.add("active");
 				});
+
 				button.addEventListener("mouseup", function() {
 					mouseDown = false;
+					socket.emit('mouseup', j);
 					this.classList.remove("active");
 				});
 				button.addEventListener('focus', function(event) {
@@ -305,6 +312,20 @@
 		}
 	}
 
+	socket.on('mousedown', function(index) {
+		var button = document.querySelectorAll('.sound-button');
+		for (var i = 0; i < button.length; i++) {
+			button[index].classList.add("active");
+		}
+	});
+
+	socket.on('mouseup', function(index) {
+		var button = document.querySelectorAll('.sound-button');
+		for (var i = 0; i < button.length; i++) {
+			button[index].classList.remove("active");
+		}
+	});
+
 	function playSound(buffer) {
 
 		var source = audioCtx.createBufferSource();
@@ -317,12 +338,11 @@
 		}
 	}
 
+	socket.on('playsound', function(sound) {
+		playAllSound(sound);
+	});
 
-		socket.on('play sound', function(sound) {
-			playAllSound(sound);
-		});
-
-	function playAllSound(sound){
+	function playAllSound(sound) {
 		var audio = new Audio(sound.src);
 		var source = audioCtx.createMediaElementSource(audio);
 		source.connect(audioCtx.destination);

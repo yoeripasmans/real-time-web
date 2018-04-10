@@ -15,9 +15,16 @@ app.use(compression());
 app.use('/', controllers);
 
 io.on('connection', function(socket) {
+	console.log(io.engine.clientsCount);
     console.log('a user connected');
-    socket.on('play sound', function(sound) {
-        socket.broadcast.emit('play sound', sound);
+    socket.on('playsound', function(sound) {
+        socket.broadcast.emit('playsound', sound);
+    });
+	socket.on('mousedown', function(index) {
+        socket.broadcast.emit('mousedown', index);
+    });
+	socket.on('mouseup', function(el) {
+        socket.broadcast.emit('mouseup', el);
     });
 });
 
