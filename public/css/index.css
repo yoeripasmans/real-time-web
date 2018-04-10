@@ -89,6 +89,7 @@ main {
 .sound-button.socket-active {
     background-color: #4BB4D7;
 }
+
 .audio-controls {
     margin: 32px auto;
     margin: 2em auto;
@@ -155,7 +156,27 @@ main {
 }
 
 .user-counter {
-	text-align: center;
+	display: none!important;
+    width: 100%;
+    text-align: center;
+    bottom: 4em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.user-counter:before{
+	content: "";
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background-color: #92CC3E;
+	margin-right: 7px;
+}
+
+.user-counter.active {
+	display: block!important;
 }
 
 @keyframes fly-in {

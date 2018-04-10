@@ -116,6 +116,7 @@
 
 		createPads(instruments);
 		createAudioPlayer(loops);
+		document.querySelector(".user-counter").classList.add('active');
 		loader.hide();
 		incomingText.init(instruments);
 
@@ -352,7 +353,7 @@
 	socket.on('totalUsers', function(data){
         var userCounter = document.querySelector(".user-counter");
 		if(data.count > 1) {
-		userCounter.textContent = data.count + " people are connected";
+		userCounter.textContent = data.count + " people are on fire";
 		}
     });
 
