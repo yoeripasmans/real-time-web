@@ -157,6 +157,7 @@ main {
 
 .user-counter {
 	display: none!important;
+	position: absolute;
     width: 100%;
     text-align: center;
     bottom: 4em;

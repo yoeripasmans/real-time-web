@@ -92,6 +92,7 @@
 	bufferLoader.load();
 
 	function bufferLoadCompleted(bufferList) {
+
 		for (var i = 0; i < bufferList.length; i++) {
 			bufferList[i].src = audioElements[i].getAttribute("src");
 			bufferList[i].name = audioElements[i].getAttribute("data-instrument");
@@ -116,8 +117,8 @@
 
 		createPads(instruments);
 		createAudioPlayer(loops);
-		document.querySelector(".user-counter").classList.add('active');
 		loader.hide();
+
 		incomingText.init(instruments);
 
 		var keys = ["3", "4", "5", "6", "e", "r", "t", "y", "d", "f", "g", "h", "c", "v", "b", "n"];
@@ -327,6 +328,26 @@
 		}
 	});
 
+
+
+	socket.on('playsound', function(sound) {
+		playAllSound(sound);
+	});
+
+	socket.on('totalUsers', function(data) {
+		showCurrentUsers(data);
+	});
+
+	function showCurrentUsers(data){
+		var userCounter = document.querySelector(".user-counter");
+		if (data.count > 1) {
+			userCounter.textContent = data.count + " people are on fire";
+			userCounter.classList.add('active');
+		} else {
+			userCounter.classList.remove('active');
+		}
+	}
+
 	function playSound(buffer) {
 
 		var source = audioCtx.createBufferSource();
@@ -339,22 +360,11 @@
 		}
 	}
 
-	socket.on('playsound', function(sound) {
-		playAllSound(sound);
-	});
-
 	function playAllSound(sound) {
 		var audio = new Audio(sound.src);
 		var source = audioCtx.createMediaElementSource(audio);
 		source.connect(audioCtx.destination);
 		audio.play();
 	}
-
-	socket.on('totalUsers', function(data){
-        var userCounter = document.querySelector(".user-counter");
-		if(data.count > 1) {
-		userCounter.textContent = data.count + " people are on fire";
-		}
-    });
 
 })();
