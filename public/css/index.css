@@ -176,9 +176,9 @@ main {
 	margin-right: 7px;
 }
 
-.user-counter.active, .user-counter.active:before {
+/* .user-counter.active, .user-counter.active:before {
 	display: inline-block!important;
-}
+} */
 
 @keyframes fly-in {
     0% {
